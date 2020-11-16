@@ -17,7 +17,6 @@
 package com.physphil.android.unitconverterultimate.presenters
 
 import android.content.Context
-import android.os.Build
 import com.physphil.android.unitconverterultimate.Preferences
 import com.physphil.android.unitconverterultimate.models.Language
 import java.util.*
@@ -40,11 +39,7 @@ class MainActivityPresenter(private val view: MainActivityView, private val cont
 
         val resources = context.resources
         val configuration = resources.configuration
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            configuration.setLocale(locale)
-        } else {
-            configuration.locale = locale
-        }
+        configuration.setLocale(locale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 }
