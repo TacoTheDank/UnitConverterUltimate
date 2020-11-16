@@ -18,7 +18,7 @@ package com.physphil.android.unitconverterultimate;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;

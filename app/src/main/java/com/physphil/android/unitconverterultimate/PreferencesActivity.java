@@ -47,7 +47,7 @@ public class PreferencesActivity extends BaseActivity {
         setToolbarHomeNavigation(true);
 
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, PreferencesFragment.newInstance())
                     .commit();
         }

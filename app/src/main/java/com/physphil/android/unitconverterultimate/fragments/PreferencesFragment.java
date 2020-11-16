@@ -19,10 +19,10 @@ package com.physphil.android.unitconverterultimate.fragments;
 import android.content.ActivityNotFoundException;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
 import android.widget.Toast;
 
 import com.physphil.android.unitconverterultimate.AcknowledgementsActivity;
@@ -40,7 +40,7 @@ import java.util.Comparator;
  * Fragment to display preferences screen
  * Created by Phizz on 15-08-02.
  */
-public class PreferencesFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class PreferencesFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String GITHUB_ISSUE = "https://github.com/physphil/UnitConverterUltimate/issues";
     private static final String PRIVACY_POLICY = "https://privacypolicies.com/privacy/view/f7a41d67f1b0081f249c2ff0a3123136";
@@ -50,8 +50,7 @@ public class PreferencesFragment extends PreferenceFragment implements SharedPre
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
 
         // Add listeners to preferences
