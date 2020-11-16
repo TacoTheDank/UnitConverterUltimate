@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
@@ -28,7 +27,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         viewModel.init(this)
 
         findPreference<ListPreference>(SettingsViewModel.Keys.LANGUAGE)?.let { language ->
-            val entries = LanguageRepository.getLanguageEntriesForLocale(context!!)
+            val entries = LanguageRepository.getLanguageEntriesForLocale(requireContext())
             language.entries = entries.entries
             language.entryValues = entries.entryValues
         }
@@ -48,7 +47,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun SettingsViewModel.init(lifecycleOwner: LifecycleOwner) {
-        openUrlEvent.observe(lifecycleOwner, Observer {
+        openUrlEvent.observe(lifecycleOwner, {
             it.getIfNotHandled()?.let { url ->
                 openUrl(url)
             }

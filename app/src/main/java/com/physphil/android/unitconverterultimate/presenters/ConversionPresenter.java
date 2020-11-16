@@ -129,24 +129,19 @@ public class ConversionPresenter {
     }
 
     public void onGetUnitsToDisplay(@Conversion.id int conversionId) {
-        switch (conversionId) {
-            case Conversion.CURRENCY:
-                if (Conversions.getInstance().hasCurrency()) {
-                    mView.showUnitsList(Conversions.getInstance().getById(conversionId));
-                }
-                else {
-                    mView.showProgressCircle();
-                }
-
-                // Only update the conversions the first time the user views them per session
-                if (!Conversions.getInstance().isCurrencyUpdated()) {
-                    onUpdateCurrencyConversions();
-                }
-                break;
-
-            default:
+        if (conversionId == Conversion.CURRENCY) {
+            if (Conversions.getInstance().hasCurrency()) {
                 mView.showUnitsList(Conversions.getInstance().getById(conversionId));
-                break;
+            } else {
+                mView.showProgressCircle();
+            }
+
+            // Only update the conversions the first time the user views them per session
+            if (!Conversions.getInstance().isCurrencyUpdated()) {
+                onUpdateCurrencyConversions();
+            }
+        } else {
+            mView.showUnitsList(Conversions.getInstance().getById(conversionId));
         }
     }
 
@@ -214,20 +209,20 @@ public class ConversionPresenter {
         if (from.getId() != to.getId() && value != 0) {
             if (from.getId() == Unit.L_100K)   // Litres/100km
             {
-                BigDecimal toBase = new BigDecimal(from.getConversionToBaseUnit());
-                BigDecimal fromBase = new BigDecimal(to.getConversionFromBaseUnit());
+                BigDecimal toBase = BigDecimal.valueOf(from.getConversionToBaseUnit());
+                BigDecimal fromBase = BigDecimal.valueOf(to.getConversionFromBaseUnit());
                 BigDecimal resultBd = toBase.divide(new BigDecimal(value), RoundingMode.UP).multiply(fromBase);
                 result = resultBd.doubleValue();
             }
             else if (to.getId() == Unit.L_100K)   // Litres/100km
             {
-                BigDecimal fromBase = new BigDecimal(to.getConversionFromBaseUnit());
-                BigDecimal toBase = new BigDecimal(from.getConversionToBaseUnit());
+                BigDecimal fromBase = BigDecimal.valueOf(to.getConversionFromBaseUnit());
+                BigDecimal toBase = BigDecimal.valueOf(from.getConversionToBaseUnit());
                 BigDecimal resultBd = fromBase.divide(new BigDecimal(value).multiply(toBase), RoundingMode.UP);
                 result = resultBd.doubleValue();
             }
             else {
-                BigDecimal multiplier = new BigDecimal(from.getConversionToBaseUnit()).multiply(new BigDecimal(to.getConversionFromBaseUnit()));
+                BigDecimal multiplier = BigDecimal.valueOf(from.getConversionToBaseUnit()).multiply(BigDecimal.valueOf(to.getConversionFromBaseUnit()));
                 BigDecimal bdResult = new BigDecimal(value).multiply(multiplier);
                 result = bdResult.doubleValue();
             }
@@ -247,7 +242,7 @@ public class ConversionPresenter {
         double result = value;
         if (from.getId() != to.getId()) {
             // use BigDecimal to eliminate multiplication rounding errors
-            BigDecimal multiplier = new BigDecimal(from.getConversionToBaseUnit()).multiply(new BigDecimal(to.getConversionFromBaseUnit()));
+            BigDecimal multiplier = BigDecimal.valueOf(from.getConversionToBaseUnit()).multiply(BigDecimal.valueOf(to.getConversionFromBaseUnit()));
             BigDecimal bdResult = new BigDecimal(value).multiply(multiplier);
             result = bdResult.doubleValue();
         }

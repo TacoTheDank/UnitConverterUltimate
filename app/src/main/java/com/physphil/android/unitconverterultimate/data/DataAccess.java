@@ -99,7 +99,7 @@ public class DataAccess extends SQLiteOpenHelper {
                 cv.put(COLUMN_CONVERSION_STATE_TO_ID, cs.getToId());
                 mDb.replace(TABLE_CONVERSION_STATE, null, cv);
             }
-        }).run();
+        }).start();
     }
 
     /**

@@ -122,20 +122,17 @@ public class MainActivity extends BaseActivity implements MainActivityView, Shar
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
-                switch (menuItem.getItemId()) {
-                    case R.id.drawer_settings:
-                        PreferencesActivity.start(MainActivity.this);
-                        return true;
-
-                    default:
-                        menuItem.setChecked(true);
-                        int conversion = getConversionFromDrawer(menuItem.getItemId());
-                        setToolbarTitle(mConversions.getById(conversion).getLabelResource());
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragment_container, ConversionFragment.newInstance(conversion))
-                                .commit();
-                        return true;
+                if (menuItem.getItemId() == R.id.drawer_settings) {
+                    PreferencesActivity.start(MainActivity.this);
+                    return true;
                 }
+                menuItem.setChecked(true);
+                int conversion = getConversionFromDrawer(menuItem.getItemId());
+                setToolbarTitle(mConversions.getById(conversion).getLabelResource());
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, ConversionFragment.newInstance(conversion))
+                        .commit();
+                return true;
             }
         });
     }
@@ -194,8 +191,6 @@ public class MainActivity extends BaseActivity implements MainActivityView, Shar
 
     private int getMenuPositionOfConversion(@Conversion.id final int conversion) {
         switch (conversion) {
-            case Conversion.AREA:
-                return 0;
             case Conversion.COOKING:
                 return 1;
             case Conversion.CURRENCY:
@@ -224,6 +219,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Shar
                 return 13;
             case Conversion.VOLUME:
                 return 14;
+            case Conversion.AREA:
             default:
                 return 0;
         }
@@ -249,14 +245,11 @@ public class MainActivity extends BaseActivity implements MainActivityView, Shar
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            mDrawerLayout.openDrawer(GravityCompat.START);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     // region MainActivityView implementation

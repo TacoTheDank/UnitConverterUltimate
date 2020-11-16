@@ -30,10 +30,9 @@ class MainActivityPresenter(private val view: MainActivityView, private val cont
     }
 
     fun setLanguageToDisplay() {
-        val language = prefs.language
 
         // Use default locale if not specified, otherwise use saved locale from preferences
-        val locale = when (language) {
+        val locale = when (val language = prefs.language) {
             Language.DEFAULT -> Locale.getDefault()
             Language.PORTUGUESE_BR -> Locale("pt", "BR")
             else -> Locale(language.id)

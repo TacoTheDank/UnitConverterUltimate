@@ -10,7 +10,6 @@ import androidx.core.view.get
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.physphil.android.unitconverterultimate.conversion.ConversionRepository
 import com.physphil.android.unitconverterultimate.models.ConversionType
@@ -53,7 +52,7 @@ class ConversionFragment : Fragment() {
             conversionViewModel.updateValue(input)
         }
 
-        initialRadioGroupView.setOnCheckedChangeListener { group, checkedId ->
+        initialRadioGroupView.setOnCheckedChangeListener { _, checkedId ->
             conversionViewModel.updateInitialIndex(checkedId)
         }
 
@@ -86,16 +85,14 @@ class ConversionFragment : Fragment() {
     }
 
     private fun ConversionViewModel.init(lifecycleOwner: LifecycleOwner) {
-        viewData.observe(lifecycleOwner, Observer {
-            renderView(it)
-        })
+        viewData.observe(lifecycleOwner, this@ConversionFragment::renderView)
 
-        selectedUnitsLiveData.observe(lifecycleOwner, Observer {
+        selectedUnitsLiveData.observe(lifecycleOwner, {
             initialRadioGroupView.checkIndex(it.initialIndex)
             finalRadioGroupView.checkIndex(it.finalIndex)
         })
 
-        resultLiveData.observe(lifecycleOwner, Observer {
+        resultLiveData.observe(lifecycleOwner, {
             resultTextView.text = it.toPlainString()
         })
     }
