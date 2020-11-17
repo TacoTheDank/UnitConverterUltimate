@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Shar
         setupToolbar();
         setToolbarHomeNavigation(true);
         if (getSupportActionBar() != null)
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
 
         int conversion = Preferences.getInstance(this).getLastConversion();
         setToolbarTitle(mConversions.getById(conversion).getLabelResource());
