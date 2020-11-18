@@ -15,10 +15,12 @@
   ~ limitations under the License.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        android:title="@string/prefs_title_formatting">
+        android:title="@string/prefs_title_formatting"
+        app:iconSpaceReserved="false">
 
         <ListPreference
             android:key="number_decimals"
@@ -26,7 +28,8 @@
             android:summary="@string/prefs_summary_number_decimals"
             android:defaultValue="@string/default_number_decimals"
             android:entries="@array/number_decimals"
-            android:entryValues="@array/number_decimals"/>
+            android:entryValues="@array/number_decimals"
+            app:iconSpaceReserved="false"/>
 
         <ListPreference
             android:key="group_separator"
@@ -34,7 +37,8 @@
             android:summary="@string/prefs_summary_group_separator"
             android:defaultValue="@string/default_group_separator"
             android:entries="@array/group_separators"
-            android:entryValues="@array/group_separators"/>
+            android:entryValues="@array/group_separators"
+            app:iconSpaceReserved="false"/>
 
         <ListPreference
             android:key="decimal_separator"
@@ -42,64 +46,76 @@
             android:summary="@string/prefs_summary_decimal_separator"
             android:defaultValue="@string/default_decimal_separator"
             android:entries="@array/decimal_separators"
-            android:entryValues="@array/decimal_separators"/>
+            android:entryValues="@array/decimal_separators"
+            app:iconSpaceReserved="false"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/prefs_title_visual">
+        android:title="@string/prefs_title_visual"
+        app:iconSpaceReserved="false">
 
         <CheckBoxPreference
             android:key="light_theme"
             android:title="@string/prefs_title_light_theme"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
 
         <ListPreference
             android:key="language"
             android:title="@string/prefs_title_language"
             android:summary="@string/prefs_summary_language"
-            android:defaultValue="@string/language_code_default"/>
+            android:defaultValue="@string/language_code_default"
+            app:iconSpaceReserved="false"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="other"
-        android:title="@string/prefs_title_other">
+        android:title="@string/prefs_title_other"
+        app:iconSpaceReserved="false">
 
         <Preference
             android:key="donate"
             android:title="@string/prefs_title_donate"
-            android:summary="@string/prefs_summary_donate"/>
+            android:summary="@string/prefs_summary_donate"
+            app:iconSpaceReserved="false"/>
 
         <Preference
             android:key="acknowledgements"
             android:title="@string/prefs_title_acknowledgements"
-            android:summary="@string/prefs_summary_acknowledgements"/>
+            android:summary="@string/prefs_summary_acknowledgements"
+            app:iconSpaceReserved="false"/>
 
         <Preference
             android:key="unit_request"
             android:title="@string/prefs_title_unit_request"
-            android:summary="@string/prefs_summary_unit_request"/>
+            android:summary="@string/prefs_summary_unit_request"
+            app:iconSpaceReserved="false"/>
 
         <Preference
             android:key="rate_app"
             android:title="@string/prefs_title_rate"
-            android:summary="@string/prefs_summary_rate" />
+            android:summary="@string/prefs_summary_rate"
+            app:iconSpaceReserved="false" />
 
         <Preference
             android:key="open_issue"
             android:title="@string/prefs_title_open_issue"
-            android:summary="@string/prefs_summary_open_issue" />
+            android:summary="@string/prefs_summary_open_issue"
+            app:iconSpaceReserved="false" />
 
         <Preference
             android:key="view_source"
             android:title="@string/prefs_title_source_code"
-            android:summary="@string/pref_summary_source_code"/>
+            android:summary="@string/pref_summary_source_code"
+            app:iconSpaceReserved="false"/>
 
         <Preference
             android:key="privacy_policy"
             android:title="@string/prefs_title_privacy_policy"
-            android:summary="@string/prefs_summary_privacy_policy"/>
+            android:summary="@string/prefs_summary_privacy_policy"
+            app:iconSpaceReserved="false"/>
 
     </PreferenceCategory>
 
